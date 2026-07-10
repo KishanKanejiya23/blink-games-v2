@@ -5,7 +5,14 @@ import { SITE_URL } from "@/lib/seo";
 // Revalidate the sitemap hourly so newly imported games get picked up without a redeploy.
 export const revalidate = 3600;
 
-const STATIC_PAGES = ["/about", "/developers", "/privacy", "/terms", "/contact"];
+const STATIC_PAGES = [
+  "/about",
+  "/developers",
+  "/advertise",
+  "/privacy",
+  "/terms",
+  "/contact",
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [categories, games] = await Promise.all([

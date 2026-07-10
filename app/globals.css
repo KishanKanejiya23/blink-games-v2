@@ -102,8 +102,230 @@ a { color: inherit; text-decoration: none; }
 .prose { max-width: 760px; margin: 0 auto; padding: 30px 0 40px; }
 .prose h1 { font-size: clamp(24px, 5vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
 .prose h2 { font-size: 19px; font-weight: 700; margin: 26px 0 8px; }
+.prose h3 { font-size: 16px; font-weight: 700; margin-top: 4px; }
 .prose p, .prose li { color: var(--muted); font-size: 15px; line-height: 1.7; margin-top: 8px; }
+.prose .lead { font-size: 17px; color: var(--text); }
 .prose ul { padding-left: 22px; margin-top: 8px; }
 .prose a { color: var(--brand-2); }
+
+/* FAQ accordion */
+.faq { max-width: 860px; margin: 26px auto 8px; }
+.faq details { background: var(--card); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px; padding: 12px 16px; margin-bottom: 10px; }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 15px; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; float: right; color: var(--brand-2); font-weight: 700; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-top: 10px; }
+
+/* advertise page format cards */
+.ad-formats { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); margin: 10px 0 6px; }
+.ad-format { background: var(--card); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; }
+.ad-format h3 { margin-top: 8px; }
+@media (max-width: 640px) { .ad-formats { grid-template-columns: 1fr; } }
+
 .notice { background: rgba(108,76,255,0.12); border: 1px solid rgba(108,76,255,0.4); color: #cfc8ff;
   border-radius: 10px; padding: 12px 16px; font-size: 14px; margin: 16px 0; }
+
+/* ============================================================
+   BlinkGames homepage — layout & typography adapted from the old
+   site, restyled with BlinkGames' purple/cyan brand. All rules are
+   scoped to .blink-home so game/category/static pages keep the
+   standard dark theme.
+   ============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Montserrat:wght@400;600;700&family=Tilt+Warp&display=swap");
+
+/* Dark dotted backdrop only on the homepage. */
+body:has(.blink-home) {
+  background: #0d0f1a url("/bg.svg") repeat top center fixed;
+  background-size: 1200px auto;
+}
+
+.blink-home { font-family: "Montserrat", system-ui, sans-serif; }
+
+/* Hero */
+.blink-hero { text-align: center; padding: 64px 16px 30px; }
+.blink-hero-inner { max-width: 1000px; margin: 0 auto; }
+.blink-brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Tilt Warp", sans-serif; font-size: 20px; letter-spacing: 0.5px;
+  color: var(--text); margin-bottom: 10px;
+}
+.blink-brand-mark {
+  width: 30px; height: 30px; border-radius: 9px; display: inline-grid; place-items: center;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); font-size: 16px;
+}
+.blink-hero-title {
+  font-family: "League Spartan", sans-serif; font-weight: 800;
+  font-size: clamp(2.1rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em;
+  background: linear-gradient(90deg, var(--text), var(--brand-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 6px 0 8px;
+}
+.blink-hero-subtitle { color: var(--muted); font-size: clamp(1rem, 2.2vw, 1.2rem); margin-bottom: 20px; }
+.blink-hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.blink-btn-primary, .blink-btn-tertiary {
+  display: inline-block; border-radius: 14px; padding: 13px 26px; min-width: 150px;
+  font-family: "Tilt Warp", sans-serif; font-size: 1.05rem; font-weight: 700;
+  transition: transform 0.18s ease, filter 0.18s ease, background-color 0.18s ease;
+}
+.blink-btn-primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+  box-shadow: 0 10px 24px rgba(108,76,255,0.4);
+}
+.blink-btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.blink-btn-tertiary {
+  background: rgba(255,255,255,0.08); color: var(--text);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.blink-btn-tertiary:hover { transform: translateY(-2px); background: rgba(255,255,255,0.14); }
+
+/* Category sorter pills (branded button row) */
+.blink-home .blink-sorter .chips { justify-content: center; flex-wrap: wrap; overflow: visible; }
+.blink-home .blink-sorter .chip {
+  font-family: "Tilt Warp", sans-serif; background: #fff; color: #111;
+  border: 0; padding: 9px 18px; font-size: 15px;
+  transition: transform 0.2s cubic-bezier(0.05,0.75,0.12,0.97), filter 0.2s ease;
+}
+.blink-home .blink-sorter .chip:hover { transform: scale(0.96); filter: brightness(0.94); }
+.blink-home .blink-sorter .chip.active {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+}
+
+/* Game cards — rounded tiles that scale on hover */
+.blink-home .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+.blink-home .card {
+  background: transparent; border-radius: 1rem; overflow: visible; box-shadow: none;
+}
+.blink-home .card:hover { transform: none; box-shadow: none; }
+.blink-home .card img {
+  border-radius: 1rem; aspect-ratio: 1/1; height: auto;
+  box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+  transition: transform 0.25s cubic-bezier(0.05,0.75,0.12,0.97);
+}
+.blink-home .card:hover img { transform: scale(1.08); }
+.blink-home .card .label {
+  position: static; padding: 8px 4px 0; background: none; font-family: "Tilt Warp", sans-serif;
+  font-size: 13px; text-align: center; color: var(--text);
+}
+.blink-home .card .cat-tag { font-family: "Montserrat", sans-serif; }
+
+/* Feature highlight cards */
+.blink-features { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin: 26px 0 8px; }
+.blink-feature {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 18px; text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.blink-feature:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
+.blink-feature h3 { font-family: "Tilt Warp", sans-serif; font-size: 17px; margin-top: 8px; }
+.blink-feature p { color: var(--muted); font-size: 13.5px; margin-top: 6px; line-height: 1.6; }
+.blink-feature-icon { font-size: 30px; line-height: 1; }
+@media (max-width: 720px) { .blink-features { grid-template-columns: 1fr; } }
+
+/* SEO copy block */
+.blink-seo-copy { max-width: 900px; margin: 26px auto 6px; }
+.blink-seo-copy h2 { font-family: "League Spartan", sans-serif; font-size: clamp(1.4rem, 3.4vw, 2rem); margin-bottom: 10px; }
+.blink-seo-copy p { color: var(--muted); font-size: 15px; line-height: 1.75; margin-top: 8px; }
+.blink-seo-copy a, .blink-cat-links a { color: var(--brand-2); }
+
+/* ============================================================
+   DuckMath-style homepage — ported layout/typography, restyled
+   with BlinkGames' purple/cyan brand. All rules scoped to .dm-home
+   so game/category/static pages keep the standard dark theme.
+   ============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Montserrat:wght@400;600;700&family=Tilt+Warp&display=swap");
+
+/* Dark dotted backdrop (same asset DuckMath ships) only on the homepage. */
+body:has(.dm-home) {
+  background: #0d0f1a url("/bg.svg") repeat top center fixed;
+  background-size: 1200px auto;
+}
+
+.dm-home { font-family: "Montserrat", system-ui, sans-serif; }
+
+/* Hero */
+.dm-hero { text-align: center; padding: 64px 16px 30px; }
+.dm-hero-inner { max-width: 1000px; margin: 0 auto; }
+.dm-brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Tilt Warp", sans-serif; font-size: 20px; letter-spacing: 0.5px;
+  color: var(--text); margin-bottom: 10px;
+}
+.dm-brand-mark {
+  width: 30px; height: 30px; border-radius: 9px; display: inline-grid; place-items: center;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); font-size: 16px;
+}
+.dm-hero-title {
+  font-family: "League Spartan", sans-serif; font-weight: 800;
+  font-size: clamp(2.1rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -0.01em;
+  background: linear-gradient(90deg, var(--text), var(--brand-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 6px 0 8px;
+}
+.dm-hero-subtitle { color: var(--muted); font-size: clamp(1rem, 2.2vw, 1.2rem); margin-bottom: 20px; }
+.dm-hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.dm-btn-primary, .dm-btn-tertiary {
+  display: inline-block; border-radius: 14px; padding: 13px 26px; min-width: 150px;
+  font-family: "Tilt Warp", sans-serif; font-size: 1.05rem; font-weight: 700;
+  transition: transform 0.18s ease, filter 0.18s ease, background-color 0.18s ease;
+}
+.dm-btn-primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+  box-shadow: 0 10px 24px rgba(108,76,255,0.4);
+}
+.dm-btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.dm-btn-tertiary {
+  background: rgba(255,255,255,0.08); color: var(--text);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.dm-btn-tertiary:hover { transform: translateY(-2px); background: rgba(255,255,255,0.14); }
+
+/* Category sorter pills (DuckMath button row, brand-colored) */
+.dm-home .dm-sorter .chips { justify-content: center; flex-wrap: wrap; overflow: visible; }
+.dm-home .dm-sorter .chip {
+  font-family: "Tilt Warp", sans-serif; background: #fff; color: #111;
+  border: 0; padding: 9px 18px; font-size: 15px;
+  transition: transform 0.2s cubic-bezier(0.05,0.75,0.12,0.97), filter 0.2s ease;
+}
+.dm-home .dm-sorter .chip:hover { transform: scale(0.96); filter: brightness(0.94); }
+.dm-home .dm-sorter .chip.active {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+}
+
+/* Game cards — DuckMath rounded tiles that scale on hover */
+.dm-home .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+.dm-home .card {
+  background: transparent; border-radius: 1rem; overflow: visible; box-shadow: none;
+}
+.dm-home .card:hover { transform: none; box-shadow: none; }
+.dm-home .card img {
+  border-radius: 1rem; aspect-ratio: 1/1; height: auto;
+  box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;
+  transition: transform 0.25s cubic-bezier(0.05,0.75,0.12,0.97);
+}
+.dm-home .card:hover img { transform: scale(1.08); }
+.dm-home .card .label {
+  position: static; padding: 8px 4px 0; background: none; font-family: "Tilt Warp", sans-serif;
+  font-size: 13px; text-align: center; color: var(--text);
+}
+.dm-home .card .cat-tag { font-family: "Montserrat", sans-serif; }
+
+/* Feature highlight cards */
+.dm-features { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); margin: 26px 0 8px; }
+.dm-feature {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 18px; text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.dm-feature:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
+.dm-feature h3 { font-family: "Tilt Warp", sans-serif; font-size: 17px; margin-top: 8px; }
+.dm-feature p { color: var(--muted); font-size: 13.5px; margin-top: 6px; line-height: 1.6; }
+.dm-feature-icon { font-size: 30px; line-height: 1; }
+@media (max-width: 720px) { .dm-features { grid-template-columns: 1fr; } }
+
+/* SEO copy block */
+.dm-seo-copy { max-width: 900px; margin: 26px auto 6px; }
+.dm-seo-copy h2 { font-family: "League Spartan", sans-serif; font-size: clamp(1.4rem, 3.4vw, 2rem); margin-bottom: 10px; }
+.dm-seo-copy p { color: var(--muted); font-size: 15px; line-height: 1.75; margin-top: 8px; }
+.dm-seo-copy a, .dm-cat-links a { color: var(--brand-2); }

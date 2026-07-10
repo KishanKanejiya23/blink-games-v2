@@ -188,6 +188,50 @@ export function collectionPageJsonLd(cat: Category, gameCount: number) {
   };
 }
 
+/**
+ * Homepage FAQ — targets high-volume "unblocked games / games at school"
+ * queries (our school + teen audience). Rendered as an accordion and emitted
+ * as FAQPage structured data for rich results.
+ */
+export const HOME_FAQ: { q: string; a: string }[] = [
+  {
+    q: "What is BlinkGames?",
+    a: "BlinkGames is a free online games website with hundreds of browser games — puzzle, action, racing, sports, arcade and .io games. Every game plays instantly in your browser with no download and no sign-up.",
+  },
+  {
+    q: "Are the games really free?",
+    a: "Yes. Every game on BlinkGames is completely free to play. The site is supported by minimal, non-intrusive advertising, so we never charge you and never ask for payment details.",
+  },
+  {
+    q: "Do I need to download or install anything?",
+    a: "No. All BlinkGames games are HTML5 games that run straight in your web browser. There is nothing to download or install — just click a game and play on your phone, tablet, laptop or school computer.",
+  },
+  {
+    q: "Can I play BlinkGames at school?",
+    a: "BlinkGames is built to be fast and lightweight so it loads quickly on school and home networks. Games play right in the browser with no install needed. Always follow your school's network rules and use the site responsibly.",
+  },
+  {
+    q: "Do I need an account to play?",
+    a: "No account is required. You can start playing any game instantly — no registration, no email, no personal details.",
+  },
+  {
+    q: "How often are new games added?",
+    a: "The catalogue is updated regularly from licensed HTML5 game feeds, so new games appear automatically and older ones stay fresh.",
+  },
+];
+
+export function faqJsonLd(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.q,
+      acceptedAnswer: { "@type": "Answer", text: it.a },
+    })),
+  };
+}
+
 /** Render helper: serialize JSON-LD for a <script type="application/ld+json"> tag. */
 export function jsonLdScript(data: object | object[]) {
   return JSON.stringify(data).replace(/</g, "\\u003c");

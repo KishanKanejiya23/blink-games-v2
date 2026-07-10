@@ -25,6 +25,7 @@ export function Footer() {
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
           <Link href="/developers">Developers</Link>
+          <Link href="/advertise">Advertise</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
           <Link href="/contact">Contact</Link>
