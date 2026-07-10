@@ -4,12 +4,34 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AdSlot } from "@/components/AdSlot";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "BlinkGames — Play Free Online Games. Always On.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "BlinkGames — Play Free Online Games. Always On.",
+    template: `%s | ${SITE_NAME}`,
+  },
   description:
-    "Play hundreds of free online games at BlinkGames — puzzle, arcade, action, racing, sports and .io games. No downloads. Instant play on mobile and desktop.",
-  metadataBase: new URL("https://www.blinkgames.fun"),
+    "Play hundreds of free online games at BlinkGames — puzzle, arcade, action, racing, sports and .io games. No downloads, no sign-up. Instant play on mobile and desktop.",
+  applicationName: SITE_NAME,
+  keywords: [
+    "free online games",
+    "browser games",
+    "games no download",
+    "play games online",
+    "html5 games",
+    "puzzle games",
+    "arcade games",
+    "io games",
+  ],
+  robots: { index: true, follow: true },
+  openGraph: {
+    siteName: SITE_NAME,
+    type: "website",
+    locale: "en_GB",
+  },
+  twitter: { card: "summary" },
 };
 
 export const viewport: Viewport = {
@@ -27,8 +49,18 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
+        {/* Warm up connections to third parties the page always talks to. */}
+        {process.env.NEXT_PUBLIC_SUPABASE_URL && (
+          <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
+        )}
+        {(GTM_ID || GA_ID) && (
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+        )}
+        {ADSENSE && (
+          <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        )}
         {GTM_ID && (
           <Script id="gtm-base" strategy="afterInteractive">
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

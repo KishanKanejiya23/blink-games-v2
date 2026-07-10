@@ -1,15 +1,14 @@
 import type { MetadataRoute } from "next";
-
-// Keep in sync with metadataBase in app/layout.tsx.
-const SITE_URL = "https://www.blinkgames.fun";
+import { SITE_URL } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      // API routes have nothing to index and shouldn't waste crawl budget.
-      disallow: "/api/",
+      // API routes have nothing to index; on-site search results are thin
+      // duplicates of category pages — keep both out of the crawl budget.
+      disallow: ["/api/", "/?q="],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

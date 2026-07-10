@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { getCategories, getAllGamesForSitemap } from "@/lib/games";
-
-// Keep in sync with metadataBase in app/layout.tsx.
-const SITE_URL = "https://www.blinkgames.fun";
+import { SITE_URL } from "@/lib/seo";
 
 // Revalidate the sitemap hourly so newly imported games get picked up without a redeploy.
 export const revalidate = 3600;
+
+const STATIC_PAGES = ["/about", "/developers", "/privacy", "/terms", "/contact"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [categories, games] = await Promise.all([
@@ -24,9 +24,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Category listing pages (home filtered by ?cat=).
+  const staticPages: MetadataRoute.Sitemap = STATIC_PAGES.map((p) => ({
+    url: `${SITE_URL}${p}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.3,
+  }));
+
+  // Real category landing pages (indexable, unlike the old /?cat= URLs).
   const categoryPages: MetadataRoute.Sitemap = categories.map((c) => ({
-    url: `${SITE_URL}/?cat=${c.id}`,
+    url: `${SITE_URL}/category/${c.id}`,
     lastModified: now,
     changeFrequency: "daily",
     priority: 0.8,
@@ -40,5 +47,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...home, ...categoryPages, ...gamePages];
+  return [...home, ...categoryPages, ...gamePages, ...staticPages];
 }

@@ -7,15 +7,19 @@ function fallbackThumb(title: string) {
   return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
 }
 
-export function GameCard({ game }: { game: Game }) {
+export function GameCard({ game, priority = false }: { game: Game; priority?: boolean }) {
   return (
     <Link className="card" href={`/game/${game.slug}`}>
       {game.category_id && <span className="cat-tag">{game.category_id}</span>}
       {/* Plain <img> (not next/image): thumbs come from many external CDNs and
-          we want zero-config + graceful fallback. */}
+          we want zero-config + graceful fallback. width/height reserve space
+          so the grid doesn't shift while thumbs load (CLS). */}
       <img
-        loading="lazy"
-        alt={game.title}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        width={240}
+        height={240}
+        alt={`Play ${game.title} online free`}
         src={game.thumb || fallbackThumb(game.title)}
       />
       <span className="label">{game.title}</span>

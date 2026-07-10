@@ -14,7 +14,7 @@ export function CategoryChips({
       {all.map((c) => (
         <Link
           key={c.id}
-          href={c.id === "all" ? "/" : `/?cat=${c.id}`}
+          href={c.id === "all" ? "/" : `/category/${c.id}`}
           className={"chip" + (c.id === active ? " active" : "")}
         >
           {c.label}
