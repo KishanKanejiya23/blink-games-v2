@@ -22,6 +22,8 @@ export const viewport: Viewport = {
 const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 // Single env var so you can pull GTM out after the investigation week: just delete it.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+// Google Analytics 4 (gtag.js). Remove the env var to pull it out.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -35,6 +37,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`}
           </Script>
+        )}
+        {GA_ID && (
+          <>
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-base" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
         )}
         {ADSENSE && (
           <Script

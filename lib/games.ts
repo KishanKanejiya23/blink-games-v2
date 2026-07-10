@@ -68,6 +68,35 @@ export async function getGames(
   }
 }
 
+export type SitemapGame = { slug: string; created_at: string };
+
+/**
+ * Every game's slug + created_at, for the sitemap. Pages through in 1000-row
+ * chunks so we get all rows past Supabase's default cap. Returns what it has on
+ * error so a DB hiccup degrades the sitemap gracefully instead of 500-ing.
+ */
+export async function getAllGamesForSitemap(): Promise<SitemapGame[]> {
+  const sb = getSupabase();
+  if (!sb) return [];
+  const all: SitemapGame[] = [];
+  const CHUNK = 1000;
+  try {
+    for (let from = 0; ; from += CHUNK) {
+      const { data, error } = await sb
+        .from("games")
+        .select("slug,created_at")
+        .order("id", { ascending: true })
+        .range(from, from + CHUNK - 1);
+      if (error || !data?.length) break;
+      all.push(...(data as SitemapGame[]));
+      if (data.length < CHUNK) break;
+    }
+  } catch {
+    // return whatever we collected so far
+  }
+  return all;
+}
+
 export async function getGameBySlug(slug: string): Promise<Game | null> {
   const sb = getSupabase();
   if (!sb) return null;
