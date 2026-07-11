@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { AdSlot } from "@/components/AdSlot";
+import { Offcanvas } from "@/components/Offcanvas";
+import { getCategories, getRecentGames } from "@/lib/games";
 import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d0f1a",
+  themeColor: "#7de9cf",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -47,7 +49,9 @@ const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 // Google Analytics 4 (gtag.js). Remove the env var to pull it out.
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Offcanvas search drawer content (Poko design) — shared on every page.
+  const [categories, recent] = await Promise.all([getCategories(), getRecentGames(13)]);
   return (
     <html lang="en-GB">
       <head>
@@ -105,6 +109,7 @@ gtag('config', '${GA_ID}');`}
             />
           </noscript>
         )}
+        <Offcanvas categories={categories} recent={recent} />
         <Header />
         {children}
         <Footer />

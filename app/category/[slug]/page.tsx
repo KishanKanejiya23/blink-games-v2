@@ -10,7 +10,7 @@ import {
   jsonLdScript,
 } from "@/lib/seo";
 import { CategoryChips } from "@/components/CategoryChips";
-import { InfiniteGrid } from "@/components/InfiniteGrid";
+import { PokoGrid } from "@/components/PokoGrid";
 import { AdSlot } from "@/components/AdSlot";
 
 // ISR: category listings can be an hour stale; keeps TTFB fast for crawlers.
@@ -55,7 +55,7 @@ export default async function CategoryPage({
   ];
 
   return (
-    <main className="container">
+    <main className="container poko-grid-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
@@ -81,7 +81,7 @@ export default async function CategoryPage({
       {games.length === 0 ? (
         <div className="notice">No games in this category yet — check back soon.</div>
       ) : (
-        <InfiniteGrid initial={games} category={cat.id} />
+        <PokoGrid initial={games} category={cat.id} titleTile={cat.label} />
       )}
 
       <AdSlot variant="rectangle" />

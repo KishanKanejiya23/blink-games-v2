@@ -68,6 +68,49 @@ export async function getGames(
   }
 }
 
+/** Newest games, for the search offcanvas "Recently added" strip. */
+export async function getRecentGames(limit = 13): Promise<Game[]> {
+  const sb = getSupabase();
+  if (!sb) return [];
+  try {
+    const { data, error } = await sb
+      .from("games")
+      .select(COLS)
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    if (error || !data) return [];
+    return data as Game[];
+  } catch {
+    return [];
+  }
+}
+
+export type CategoryMeta = Category & { count: number; thumb: string | null };
+
+/**
+ * Categories enriched with game count + a sample thumbnail, for the Poko
+ * category cards row. One count + one row query per category — cheap and
+ * cached by the page's ISR window.
+ */
+export async function getCategoryMeta(): Promise<CategoryMeta[]> {
+  const sb = getSupabase();
+  const cats = await getCategories();
+  if (!sb) return cats.map((c) => ({ ...c, count: 0, thumb: null }));
+  try {
+    return await Promise.all(
+      cats.map(async (c) => {
+        const [{ count }, { data }] = await Promise.all([
+          sb.from("games").select("id", { count: "exact", head: true }).eq("category_id", c.id),
+          sb.from("games").select("thumb").eq("category_id", c.id).not("thumb", "is", null).limit(1),
+        ]);
+        return { ...c, count: count ?? 0, thumb: data?.[0]?.thumb ?? null };
+      }),
+    );
+  } catch {
+    return cats.map((c) => ({ ...c, count: 0, thumb: null }));
+  }
+}
+
 export type SitemapGame = { slug: string; created_at: string };
 
 /**

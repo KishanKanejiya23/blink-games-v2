@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategories, getGameBySlug, getRelated } from "@/lib/games";
+import { getCategories, getGameBySlug, getGames, getRelated } from "@/lib/games";
 import {
   buildMetadata,
   videoGameJsonLd,
   breadcrumbJsonLd,
   jsonLdScript,
 } from "@/lib/seo";
-import { GameCard } from "@/components/GameCard";
+import { PokoNavbar } from "@/components/PokoNavbar";
+import { PokoTile } from "@/components/PokoTile";
+import { GameplayFrame } from "@/components/GameplayFrame";
 import { AdSlot } from "@/components/AdSlot";
 
 // ISR: game rows barely change after import; serving cached HTML is a big
@@ -47,11 +49,17 @@ export default async function GamePage({
   const game = await getGameBySlug(slug);
   if (!game) notFound();
 
-  const [related, categories] = await Promise.all([
+  const [related, categories, popular] = await Promise.all([
     getRelated(game, 12),
     getCategories(),
+    getGames({ limit: 40 }),
   ]);
   const category = categories.find((c) => c.id === game.category_id);
+
+  // Tiles packed around the gameplay container (Poko layout): related games
+  // first, topped up with popular games, current game excluded.
+  const seen = new Set([game.id, ...related.map((g) => g.id)]);
+  const around = [...related, ...popular.filter((g) => !seen.has(g.id))].slice(0, 34);
 
   const jsonLd = [
     videoGameJsonLd(game, category?.label),
@@ -65,91 +73,67 @@ export default async function GamePage({
   ];
 
   return (
-    <main className="container">
+    <main className="container poko-grid-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
       />
 
-      <nav className="breadcrumbs" aria-label="Breadcrumb">
-        <Link href="/">Home</Link>
-        {category && (
-          <>
-            {" "}
-            <span aria-hidden>›</span>{" "}
-            <Link href={`/category/${category.id}`}>{category.label}</Link>
-          </>
-        )}{" "}
-        <span aria-hidden>›</span> <span>{game.title}</span>
-      </nav>
+      <div className="m-grid-start">
+        <PokoNavbar tile />
+        <GameplayFrame title={game.title} embed={game.embed} />
+        {around.map((g) => (
+          // fixed 1x1 tiles so the dense grid packs cleanly around the player
+          <PokoTile key={g.id} game={g} size="" />
+        ))}
+      </div>
 
       <AdSlot variant="leaderboard" />
 
-      <div className="player-layout">
-        <div>
-          <div className="player-frame">
-            <iframe
-              src={game.embed}
-              title={game.title}
-              allow="autoplay; fullscreen; gamepad; microphone"
-              allowFullScreen
-              scrolling="no"
-            />
-          </div>
-
-          <div className="game-meta">
-            <h1>{game.title}</h1>
-            {category && (
-              <p>
-                <Link className="chip" href={`/category/${category.id}`}>
-                  {category.label} Games
-                </Link>
-              </p>
-            )}
-            <h2 className="section-title">About this game</h2>
-            <p>{gameDescription(game.title, game.description)}</p>
-
-            <h2 className="section-title">How to play {game.title}</h2>
-            <p>
-              {game.title} plays right in your browser — nothing to download or
-              install. On desktop, use your mouse and keyboard (arrow keys or
-              WASD in most games). On mobile or tablet, use the on-screen touch
-              controls. Tap the fullscreen button for the best experience
-              {category
-                ? `, and check out more free ${category.label.toLowerCase()} games below when you're done.`
-                : "."}
-            </p>
-          </div>
-
-          <Link className="back-link" href="/">
-            ← Back to all games
-          </Link>
-
-          <AdSlot variant="rectangle" />
-
-          {related.length > 0 && (
+      <section className="poko-card">
+        <nav className="breadcrumbs" aria-label="Breadcrumb" style={{ paddingTop: 0 }}>
+          <Link href="/">Home</Link>
+          {category && (
             <>
-              <h2 className="section-title">More games you&apos;ll like</h2>
-              <div className="grid">
-                {related.map((g) => (
-                  <GameCard key={g.id} game={g} />
-                ))}
-              </div>
-              {category && (
-                <p>
-                  <Link className="back-link" href={`/category/${category.id}`}>
-                    See all {category.label} games →
-                  </Link>
-                </p>
-              )}
+              {" "}
+              <span aria-hidden>›</span>{" "}
+              <Link href={`/category/${category.id}`}>{category.label}</Link>
             </>
-          )}
-        </div>
+          )}{" "}
+          <span aria-hidden>›</span> <span>{game.title}</span>
+        </nav>
 
-        <aside>
-          <AdSlot variant="sidebar" />
-        </aside>
-      </div>
+        <h1>{game.title}</h1>
+        {category && (
+          <p>
+            <Link className="chip" href={`/category/${category.id}`}>
+              {category.label} Games
+            </Link>
+          </p>
+        )}
+        <h2>About this game</h2>
+        <p>{gameDescription(game.title, game.description)}</p>
+
+        <h2>How to play {game.title}</h2>
+        <p>
+          {game.title} plays right in your browser — nothing to download or
+          install. On desktop, use your mouse and keyboard (arrow keys or WASD
+          in most games). On mobile or tablet, use the on-screen touch
+          controls. Tap the fullscreen button for the best experience
+          {category
+            ? `, and check out more free ${category.label.toLowerCase()} games above when you're done.`
+            : "."}
+        </p>
+        {category && (
+          <p>
+            <Link href={`/category/${category.id}`}>
+              See all {category.label} games →
+            </Link>
+          </p>
+        )}
+      </section>
+
+      <AdSlot variant="rectangle" />
     </main>
   );
 }

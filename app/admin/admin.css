@@ -1,0 +1,130 @@
+/* Admin panel — clean light chrome on the Poko teal backdrop. */
+
+/* Admin routes inherit the public root layout; hide its chrome here. */
+body:has(.adm-shell) .site-header,
+body:has(.adm-shell) .site-footer,
+body:has(.adm-shell) .offcanvas,
+body:has(.adm-shell) .ad-anchor,
+body:has(.adm-login-wrap) .site-header,
+body:has(.adm-login-wrap) .site-footer,
+body:has(.adm-login-wrap) .offcanvas,
+body:has(.adm-login-wrap) .ad-anchor { display: none; }
+
+.adm-shell { display: flex; min-height: 100vh; align-items: stretch; }
+.adm-sidebar {
+  width: 230px;
+  flex: 0 0 230px;
+  background: #0e3d71;
+  color: #cfe3f7;
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.adm-sidebar .poko-logo { color: #fff; margin-bottom: 20px; display: block; }
+.adm-sidebar .poko-logo .o { color: #4db2ff; }
+.adm-sidebar a, .adm-sidebar button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #cfe3f7;
+  transition: 0.2s;
+}
+.adm-sidebar a:hover, .adm-sidebar button:hover { background: #ffffff1c; color: #fff; }
+.adm-sidebar a.active { background: var(--theme-color); color: #fff; }
+.adm-sidebar .spacer { flex: 1; }
+
+.adm-main { flex: 1; padding: 28px; min-width: 0; }
+.adm-main h1 { color: var(--heading); font-size: 26px; font-weight: 800; margin-bottom: 18px; }
+
+.adm-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+.adm-stat {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 5px 10px var(--card-shadow);
+  padding: 20px;
+}
+.adm-stat .num { font-size: 30px; font-weight: 800; color: var(--theme-color); }
+.adm-stat .lbl { font-size: 13px; text-transform: uppercase; font-weight: 700; color: #667; }
+
+.adm-panel {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 5px 10px var(--card-shadow);
+  padding: 20px;
+  margin-top: 18px;
+  overflow-x: auto;
+}
+.adm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.adm-table th { text-align: left; padding: 10px 8px; color: #667; text-transform: uppercase; font-size: 11.5px; border-bottom: 2px solid #eef2f7; }
+.adm-table td { padding: 10px 8px; border-bottom: 1px solid #eef2f7; vertical-align: middle; color: #223; }
+.adm-table img { width: 46px; height: 46px; object-fit: cover; border-radius: 8px; background: #d1eefd; display: block; }
+.adm-table .title-cell { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+
+.adm-btn {
+  display: inline-block;
+  background: var(--theme-color);
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.adm-btn:hover { filter: brightness(1.1); }
+.adm-btn.ghost { background: #eef4fb; color: #0e3d71; }
+.adm-btn.danger { background: #e5484d; }
+.adm-btn.sm { padding: 6px 12px; font-size: 12.5px; border-radius: 8px; }
+.adm-btn:disabled { opacity: 0.5; cursor: default; }
+
+.adm-form { display: grid; gap: 14px; max-width: 640px; }
+.adm-form label { font-size: 13px; font-weight: 700; color: #445; display: block; margin-bottom: 4px; }
+.adm-input, .adm-form textarea, .adm-form select {
+  width: 100%;
+  border: 1.5px solid #dbe4ee;
+  background: #f7fafd;
+  border-radius: 10px;
+  padding: 10px 13px;
+  font-size: 14.5px;
+  color: #123;
+  outline: none;
+  font-family: inherit;
+}
+.adm-input:focus, .adm-form textarea:focus, .adm-form select:focus { border-color: var(--theme-color); }
+.adm-form textarea { min-height: 110px; resize: vertical; }
+
+.adm-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+.adm-toolbar .adm-input { max-width: 300px; }
+.adm-pager { display: flex; gap: 10px; align-items: center; margin-top: 14px; font-size: 13.5px; color: #445; }
+
+.adm-badge { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.adm-badge.on { background: #d3f2df; color: #11734b; }
+.adm-badge.off { background: #eef1f5; color: #778; }
+
+.adm-error { background: #fdecec; color: #b3261e; border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 10px 0; }
+.adm-ok { background: #e8f6ee; color: #11734b; border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 10px 0; }
+
+/* login */
+.adm-login-wrap { min-height: 92vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.adm-login {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px #33333330;
+  padding: 34px;
+  width: 100%;
+  max-width: 410px;
+}
+.adm-login h1 { color: var(--heading); font-size: 24px; font-weight: 800; margin: 14px 0 4px; }
+.adm-login p { color: #667; font-size: 14px; margin-bottom: 20px; }
+.adm-login form { display: grid; gap: 14px; }
+
+@media (max-width: 760px) {
+  .adm-shell { flex-direction: column; }
+  .adm-sidebar { width: 100%; flex: none; flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .adm-sidebar a, .adm-sidebar button { width: auto; }
+  .adm-sidebar .poko-logo { margin-bottom: 0; margin-right: 10px; }
+}

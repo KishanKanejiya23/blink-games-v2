@@ -1,19 +1,14 @@
-import Link from "next/link";
-import { Suspense } from "react";
-import { SearchBar } from "./SearchBar";
+import { PokoNavbar } from "./PokoNavbar";
 
+/**
+ * Standalone Poko nav card for pages without a tile grid (about, privacy, …).
+ * Grid pages render the navbar as a tile and hide this via CSS
+ * (body:has(.poko-grid-page) .site-header).
+ */
 export function Header() {
   return (
     <header className="site-header">
-      <div className="container header-inner">
-        <Link className="logo" href="/">
-          <span className="logo-mark">⚡</span> Blink<em>Games</em>
-        </Link>
-        {/* useSearchParams must be inside Suspense so static pages (404) can prerender */}
-        <Suspense fallback={<div className="search" />}>
-          <SearchBar />
-        </Suspense>
-      </div>
+      <PokoNavbar />
     </header>
   );
 }

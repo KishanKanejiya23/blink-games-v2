@@ -1,13 +1,14 @@
 {
   "name": "blinkgames",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "import:games": "node scripts/import-games.mjs"
+    "import:games": "node scripts/import-games.mjs",
+    "import:poko": "node scripts/import-poko.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

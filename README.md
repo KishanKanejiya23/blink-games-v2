@@ -4,6 +4,14 @@ Next.js 15 (App Router) HTML5 games portal, backed by **self-hosted Supabase**
 (`supabase.kishankanejiiya.tech`). Mobile-first, ad-friendly layout. Games are
 bulk-imported from **licensed** HTML5 game feeds into Supabase and rendered from there.
 
+## v2.0.0 — Poko catalog
+
+The purchased **Poko Arcade** package (`poko-games/`, a PHP script — not deployed)
+supplied its game database `poko-games/poko/poko.sql`: ~23.5k licensed HTML5 embeds.
+`npm run import:poko` parses that dump and upserts into Supabase additively
+(`source='poko'`, idempotent, never touches pre-existing rows). Ten new categories
+were added in `supabase/migrations/0002_poko_categories.sql`.
+
 ## Stack
 - **Next.js 15 / React 19** (App Router, Server Components)
 - **Supabase** — games + categories tables, read via anon key + RLS

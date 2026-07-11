@@ -1,0 +1,12 @@
+# TN - BEGIN sitemap
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# ErrorDocument 404 /404
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
+# TN - END sitemap
+
