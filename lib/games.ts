@@ -24,6 +24,13 @@ const FALLBACK_CATEGORIES: Category[] = [
 
 const COLS = "id,slug,title,category_id,thumb,embed,description,featured,plays";
 
+/**
+ * Only these sources are shown on the public site. The old pre-v2 catalog
+ * (source 'gamemonetize', 500 games) is disabled for now — add it back here
+ * to re-enable. Rows are untouched in the DB and stay manageable in /admin.
+ */
+const VISIBLE_SOURCES = ["poko", "manual"];
+
 export async function getCategories(): Promise<Category[]> {
   const sb = getSupabase();
   if (!sb) return FALLBACK_CATEGORIES;
@@ -50,7 +57,7 @@ export async function getGames(
   try {
     const limit = opts.limit ?? PAGE_SIZE;
     const offset = opts.offset ?? 0;
-    let query = sb.from("games").select(COLS);
+    let query = sb.from("games").select(COLS).in("source", VISIBLE_SOURCES);
 
     if (opts.category && opts.category !== "all") query = query.eq("category_id", opts.category);
     if (opts.q) query = query.ilike("title", `%${opts.q}%`);
@@ -76,6 +83,7 @@ export async function getRecentGames(limit = 13): Promise<Game[]> {
     const { data, error } = await sb
       .from("games")
       .select(COLS)
+      .in("source", VISIBLE_SOURCES)
       .order("created_at", { ascending: false })
       .limit(limit);
     if (error || !data) return [];
@@ -100,8 +108,8 @@ export async function getCategoryMeta(): Promise<CategoryMeta[]> {
     return await Promise.all(
       cats.map(async (c) => {
         const [{ count }, { data }] = await Promise.all([
-          sb.from("games").select("id", { count: "exact", head: true }).eq("category_id", c.id),
-          sb.from("games").select("thumb").eq("category_id", c.id).not("thumb", "is", null).limit(1),
+          sb.from("games").select("id", { count: "exact", head: true }).in("source", VISIBLE_SOURCES).eq("category_id", c.id),
+          sb.from("games").select("thumb").in("source", VISIBLE_SOURCES).eq("category_id", c.id).not("thumb", "is", null).limit(1),
         ]);
         return { ...c, count: count ?? 0, thumb: data?.[0]?.thumb ?? null };
       }),
@@ -128,6 +136,7 @@ export async function getAllGamesForSitemap(): Promise<SitemapGame[]> {
       const { data, error } = await sb
         .from("games")
         .select("slug,created_at")
+        .in("source", VISIBLE_SOURCES)
         .order("id", { ascending: true })
         .range(from, from + CHUNK - 1);
       if (error || !data?.length) break;
@@ -144,7 +153,12 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
   const sb = getSupabase();
   if (!sb) return null;
   try {
-    const { data, error } = await sb.from("games").select(COLS).eq("slug", slug).maybeSingle();
+    const { data, error } = await sb
+      .from("games")
+      .select(COLS)
+      .in("source", VISIBLE_SOURCES)
+      .eq("slug", slug)
+      .maybeSingle();
     if (error) return null;
     return (data as Game) ?? null;
   } catch {
@@ -159,6 +173,7 @@ export async function getRelated(game: Game, limit = 10): Promise<Game[]> {
     const { data } = await sb
       .from("games")
       .select(COLS)
+      .in("source", VISIBLE_SOURCES)
       .neq("slug", game.slug)
       .eq("category_id", game.category_id ?? "")
       .limit(limit);
