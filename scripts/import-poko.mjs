@@ -137,6 +137,9 @@ async function main() {
     const plays = parseInt(r[8], 10) || 0;
 
     if (!/^https?:\/\//.test(url) || !name || status !== "0") { skippedInvalid++; continue; }
+    // GamePix embeds are locked to the theme author's site id — blocked on our
+    // domain ("Content Blocked"), so never import them.
+    if (url.includes("play.gamepix.com")) { skippedInvalid++; continue; }
     if (embeds.has(url)) { skippedDupEmbed++; continue; }
     embeds.add(url); // also dedupes repeats inside the dump itself
 
