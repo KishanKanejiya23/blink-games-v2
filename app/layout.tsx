@@ -43,7 +43,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+// Publisher ID is public by nature (visible in page source and ads.txt);
+// env var only exists to override or disable it per-deployment.
+const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-1833443006240029";
 // Single env var so you can pull GTM out after the investigation week: just delete it.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 // Google Analytics 4 (gtag.js). Remove the env var to pull it out.

@@ -27,6 +27,9 @@ export function GameplayFrame({ title, embed }: { title: string; embed: string }
         src={embed}
         title={title}
         allow="autoplay; fullscreen; gamepad; microphone"
+        // no allow-popups / allow-top-navigation: blocks pop-under ads and
+        // redirects escaping the embedded game into our page or new tabs
+        sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
         allowFullScreen
         scrolling="no"
       />
