@@ -58,7 +58,7 @@ export default async function AdminDashboard() {
                     {g.title}
                   </Link>
                 </td>
-                <td>{g.category_id ?? "—"}</td>
+                <td>{g.category_id ?? "-"}</td>
                 <td>{new Date(g.created_at).toLocaleDateString()}</td>
               </tr>
             ))}

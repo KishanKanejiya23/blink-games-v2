@@ -79,7 +79,7 @@ export default async function CategoryPage({
       <h2 className="section-title">All {cat.label} Games</h2>
 
       {games.length === 0 ? (
-        <div className="notice">No games in this category yet — check back soon.</div>
+        <div className="notice">No games in this category yet - check back soon.</div>
       ) : (
         <PokoGrid initial={games} category={cat.id} titleTile={cat.label} />
       )}

@@ -15,11 +15,11 @@ export default async function NotFound() {
     <main className="container">
       <section className="hero">
         <h1>
-          Oops — that page is <em>missing</em>.
+          Oops - that page is <em>missing</em>.
         </h1>
         <p>
           The game or page you&apos;re looking for doesn&apos;t exist or has
-          been removed. But don&apos;t leave empty-handed — try one of these:
+          been removed. But don&apos;t leave empty-handed - try one of these:
         </p>
         <p>
           <Link className="chip" href="/">

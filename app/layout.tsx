@@ -11,11 +11,11 @@ import { SITE_URL, SITE_NAME } from "@/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "BlinkGames — Play Free Online Games. Always On.",
+    default: "BlinkGames - Play Free Online Games. Always On.",
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Play hundreds of free online games at BlinkGames — puzzle, arcade, action, racing, sports and .io games. No downloads, no sign-up. Instant play on mobile and desktop.",
+    "Play hundreds of free online games at BlinkGames - puzzle, arcade, action, racing, sports and .io games. No downloads, no sign-up. Instant play on mobile and desktop.",
   applicationName: SITE_NAME,
   keywords: [
     "free online games",
@@ -54,7 +54,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const ONESIGNAL_APP_ID = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Offcanvas search drawer content (Poko design) — shared on every page.
+  // Offcanvas search drawer content (Poko design) - shared on every page.
   const [categories, recent] = await Promise.all([getCategories(), getRecentGames(13)]);
   return (
     <html lang="en-GB">

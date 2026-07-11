@@ -28,7 +28,7 @@ export default function AdminLogin() {
         setError(data.error ?? "Login failed");
       }
     } catch {
-      setError("Network error — try again");
+      setError("Network error - try again");
     } finally {
       setBusy(false);
     }

@@ -1,4 +1,4 @@
-// Native <details> accordion — no client JS needed, fully crawlable, and the
+// Native <details> accordion - no client JS needed, fully crawlable, and the
 // answers are always in the DOM for search engines even when collapsed.
 export function Faq({
   items,

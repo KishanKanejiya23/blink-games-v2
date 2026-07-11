@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
 export const dynamic = "force-dynamic";
 
-// GET — categories with game counts
+// GET - categories with game counts
 export async function GET() {
   const sb = getSupabaseAdmin();
   const { data, error } = await sb.from("categories").select("id,label,sort").order("sort");
@@ -22,7 +22,7 @@ export async function GET() {
   return NextResponse.json({ categories: withCounts });
 }
 
-// POST — add category { id?, label }
+// POST - add category { id?, label }
 export async function POST(req: NextRequest) {
   const sb = getSupabaseAdmin();
   const body = await req.json().catch(() => null);
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ ok: true, id });
 }
 
-// DELETE ?id= — remove a category (games keep existing via ON DELETE SET NULL)
+// DELETE ?id= - remove a category (games keep existing via ON DELETE SET NULL)
 export async function DELETE(req: NextRequest) {
   const sb = getSupabaseAdmin();
   const id = req.nextUrl.searchParams.get("id");

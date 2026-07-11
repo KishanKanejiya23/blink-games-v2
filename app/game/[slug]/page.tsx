@@ -20,7 +20,7 @@ export const revalidate = 3600;
 /** Feed descriptions are often missing or one-liners; pad with a keyword-rich default. */
 function gameDescription(title: string, description: string | null) {
   if (description && description.length >= 80) return description;
-  const base = `Play ${title} online free at BlinkGames — no download, no sign-up. Works instantly in your browser on mobile, tablet and desktop.`;
+  const base = `Play ${title} online free at BlinkGames - no download, no sign-up. Works instantly in your browser on mobile, tablet and desktop.`;
   return description ? `${description} ${base}` : base;
 }
 
@@ -33,7 +33,7 @@ export async function generateMetadata({
   const game = await getGameBySlug(slug);
   if (!game) return { title: "Game not found" };
   return buildMetadata({
-    title: `${game.title} — Play Online Free`,
+    title: `${game.title} - Play Online Free`,
     description: gameDescription(game.title, game.description),
     path: `/game/${game.slug}`,
     image: game.thumb,
@@ -116,7 +116,7 @@ export default async function GamePage({
 
         <h2>How to play {game.title}</h2>
         <p>
-          {game.title} plays right in your browser — nothing to download or
+          {game.title} plays right in your browser - nothing to download or
           install. On desktop, use your mouse and keyboard (arrow keys or WASD
           in most games). On mobile or tablet, use the on-screen touch
           controls. Tap the fullscreen button for the best experience

@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
 const EDITABLE = ["title", "embed", "thumb", "category_id", "description", "featured"] as const;
 
-// PATCH /api/admin/games/:id — update editable fields
+// PATCH /api/admin/games/:id - update editable fields
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },

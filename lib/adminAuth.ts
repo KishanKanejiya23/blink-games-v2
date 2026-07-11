@@ -1,5 +1,5 @@
 /**
- * Admin session auth — HMAC-signed expiry tokens in an httpOnly cookie.
+ * Admin session auth - HMAC-signed expiry tokens in an httpOnly cookie.
  * Uses Web Crypto only, so it runs both in edge middleware and node routes.
  */
 
@@ -31,7 +31,7 @@ export async function sha256Hex(value: string): Promise<string> {
   return toHex(await crypto.subtle.digest("SHA-256", enc.encode(value)));
 }
 
-/** `exp.hmac(exp)` — no user data in the token; there is exactly one admin. */
+/** `exp.hmac(exp)` - no user data in the token; there is exactly one admin. */
 export async function createSessionToken(): Promise<string> {
   const exp = String(Date.now() + SESSION_HOURS * 3600_000);
   return `${exp}.${await hmac(exp)}`;

@@ -36,7 +36,7 @@ export default function AddGame() {
       });
       const data = await res.json();
       if (res.ok) {
-        setMsg({ ok: `Added "${data.game.title}" — live at /game/${data.game.slug}` });
+        setMsg({ ok: `Added "${data.game.title}" - live at /game/${data.game.slug}` });
         setForm({ title: "", embed: "", thumb: "", category_id: "", description: "", featured: false });
       } else {
         setMsg({ err: data.error ?? "Failed to add game" });
@@ -70,7 +70,7 @@ export default function AddGame() {
           <div>
             <label>Category</label>
             <select className="adm-input" value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })}>
-              <option value="">— none —</option>
+              <option value="">- none -</option>
               {cats.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.label}

@@ -20,9 +20,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { q } = await searchParams;
   return buildMetadata({
-    title: "BlinkGames — Play Free Online Games. Always On.",
+    title: "BlinkGames - Play Free Online Games. Always On.",
     description:
-      "Play thousands of free online games at BlinkGames — puzzle, arcade, action, racing, sports and .io games. No downloads, no sign-up. Instant play on mobile and desktop.",
+      "Play thousands of free online games at BlinkGames - puzzle, arcade, action, racing, sports and .io games. No downloads, no sign-up. Instant play on mobile and desktop.",
     path: "/",
     noindex: Boolean(q),
   });
@@ -54,7 +54,7 @@ export default async function Home({
 
       <main className="container">
         <h1 className="sr-only" style={{ position: "absolute", left: -9999 }}>
-          BlinkGames — Free Online Games
+          BlinkGames - Free Online Games
         </h1>
 
         {games.length === 0 ? (

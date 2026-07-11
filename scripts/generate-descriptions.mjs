@@ -79,6 +79,7 @@ const batch = await client.messages.batches.create({
             `. It appears on the game's page at BlinkGames, a free online games site. ` +
             `Natural, engaging tone for players; mention it plays free in the browser with no download. ` +
             `Do not invent specific mechanics you can't know from the title; keep claims generic but vivid. ` +
+            `Never use em dashes (—) or semicolons; use commas, periods or plain hyphens instead. ` +
             `Return only the description text, no quotes or headings.`,
         },
       ],

@@ -33,7 +33,7 @@ export default function AdvertisePage() {
         <h1>Advertise with BlinkGames</h1>
         <p className="lead">
           Reach an engaged, hard-to-target audience of teenagers, students and
-          casual gamers — in the UK and around the world.
+          casual gamers - in the UK and around the world.
         </p>
         <p>
           BlinkGames is a fast-growing free games platform. Our visitors are
@@ -58,7 +58,7 @@ export default function AdvertisePage() {
         <ul>
           <li>
             <strong>Engaged sessions.</strong> Players come to play, not to
-            bounce — meaning longer time on site and more impressions per visit.
+            bounce - meaning longer time on site and more impressions per visit.
           </li>
           <li>
             <strong>Youth & family reach.</strong> A predominantly teen and

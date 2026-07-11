@@ -3,7 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Contact Us",
   description:
-    "Contact BlinkGames — questions, feedback, game requests, business enquiries or content issues. We read everything.",
+    "Contact BlinkGames - questions, feedback, game requests, business enquiries or content issues. We read everything.",
   path: "/contact",
 });
 
@@ -13,7 +13,7 @@ export default function ContactPage() {
       <article className="prose">
         <h1>Contact BlinkGames</h1>
         <p>
-          We&apos;d love to hear from you — whether it&apos;s feedback about
+          We&apos;d love to hear from you - whether it&apos;s feedback about
           the site, a game you&apos;d like to see added, a bug report, a
           business enquiry, or a question about content.
         </p>

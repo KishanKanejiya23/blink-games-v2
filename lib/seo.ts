@@ -15,69 +15,69 @@ export const CATEGORY_SEO: Record<
   { title: string; description: string; intro: string }
 > = {
   action: {
-    title: "Free Action Games Online — Play Instantly",
+    title: "Free Action Games Online - Play Instantly",
     description:
-      "Play free action games online — shooting, fighting and battle games with no download. Instant play on mobile, tablet and desktop at BlinkGames.",
+      "Play free action games online - shooting, fighting and battle games with no download. Instant play on mobile, tablet and desktop at BlinkGames.",
     intro:
-      "Jump straight into the best free action games on the web. Shoot, fight, dodge and battle your way through fast-paced levels — no downloads, no installs, no sign-up. Every game runs instantly in your browser on any device, whether you have five minutes at school or a whole evening at home.",
+      "Jump straight into the best free action games on the web. Shoot, fight, dodge and battle your way through fast-paced levels - no downloads, no installs, no sign-up. Every game runs instantly in your browser on any device, whether you have five minutes at school or a whole evening at home.",
   },
   puzzle: {
-    title: "Free Puzzle Games Online — Brain Games, No Download",
+    title: "Free Puzzle Games Online - Brain Games, No Download",
     description:
-      "Play free puzzle games online — match-3, logic, word and brain games with no download. Instant play in your browser at BlinkGames.",
+      "Play free puzzle games online - match-3, logic, word and brain games with no download. Instant play in your browser at BlinkGames.",
     intro:
-      "Give your brain a workout with our free puzzle games. From match-3 and block puzzles to logic challenges and word games, everything here plays instantly in your browser — perfect for a quick break at school, on the bus, or whenever you fancy a mental challenge.",
+      "Give your brain a workout with our free puzzle games. From match-3 and block puzzles to logic challenges and word games, everything here plays instantly in your browser - perfect for a quick break at school, on the bus, or whenever you fancy a mental challenge.",
   },
   arcade: {
-    title: "Free Arcade Games Online — Classic & New, Play Instantly",
+    title: "Free Arcade Games Online - Classic & New, Play Instantly",
     description:
-      "Play free arcade games online — jumping, running and classic-style arcade games with no download. Instant browser play at BlinkGames.",
+      "Play free arcade games online - jumping, running and classic-style arcade games with no download. Instant browser play at BlinkGames.",
     intro:
-      "Relive the golden age of gaming and discover new favourites with our free arcade games. Run, jump, dodge and chase high scores in games that load in seconds and play on any device — no downloads or sign-ups needed.",
+      "Relive the golden age of gaming and discover new favourites with our free arcade games. Run, jump, dodge and chase high scores in games that load in seconds and play on any device - no downloads or sign-ups needed.",
   },
   sports: {
-    title: "Free Sports Games Online — Football, Basketball & More",
+    title: "Free Sports Games Online - Football, Basketball & More",
     description:
-      "Play free sports games online — football, basketball, pool and more with no download. Instant play on any device at BlinkGames.",
+      "Play free sports games online - football, basketball, pool and more with no download. Instant play on any device at BlinkGames.",
     intro:
-      "Score goals, sink baskets and win championships in our free sports games. Football, basketball, pool, golf and more — all playable instantly in your browser with nothing to install. Great for quick matches with friends or solo tournaments.",
+      "Score goals, sink baskets and win championships in our free sports games. Football, basketball, pool, golf and more - all playable instantly in your browser with nothing to install. Great for quick matches with friends or solo tournaments.",
   },
   racing: {
-    title: "Free Racing Games Online — Car & Driving Games, No Download",
+    title: "Free Racing Games Online - Car & Driving Games, No Download",
     description:
-      "Play free racing games online — car racing, drifting and driving games with no download. Instant browser play at BlinkGames.",
+      "Play free racing games online - car racing, drifting and driving games with no download. Instant browser play at BlinkGames.",
     intro:
       "Start your engines with the best free racing games online. Drift around corners, dodge traffic and race to the finish line in car, bike and kart games that run instantly in your browser on mobile, tablet or desktop.",
   },
   girls: {
-    title: "Free Girls Games Online — Dress Up, Makeover & More",
+    title: "Free Girls Games Online - Dress Up, Makeover & More",
     description:
-      "Play free girls games online — dress up, makeover, salon and cooking games with no download. Instant play at BlinkGames.",
+      "Play free girls games online - dress up, makeover, salon and cooking games with no download. Instant play at BlinkGames.",
     intro:
-      "Explore our collection of free dress up, makeover, salon and cooking games. Style outfits, run your own beauty salon and create amazing looks — every game plays instantly in your browser with no download needed.",
+      "Explore our collection of free dress up, makeover, salon and cooking games. Style outfits, run your own beauty salon and create amazing looks - every game plays instantly in your browser with no download needed.",
   },
   io: {
-    title: "Free .io Games Online — Multiplayer Games, No Download",
+    title: "Free .io Games Online - Multiplayer Games, No Download",
     description:
-      "Play free .io games online — multiplayer arena and survival games with no download. Instant play in your browser at BlinkGames.",
+      "Play free .io games online - multiplayer arena and survival games with no download. Instant play in your browser at BlinkGames.",
     intro:
-      "Battle players from around the world in our free .io games. Grow, survive and climb the leaderboard in multiplayer arenas that load in seconds — no download, no account, just instant multiplayer fun on any device.",
+      "Battle players from around the world in our free .io games. Grow, survive and climb the leaderboard in multiplayer arenas that load in seconds - no download, no account, just instant multiplayer fun on any device.",
   },
   casual: {
-    title: "Free Casual Games Online — Easy, Fun, Instant Play",
+    title: "Free Casual Games Online - Easy, Fun, Instant Play",
     description:
-      "Play free casual games online — simple, fun games for everyone with no download. Instant play on mobile and desktop at BlinkGames.",
+      "Play free casual games online - simple, fun games for everyone with no download. Instant play on mobile and desktop at BlinkGames.",
     intro:
-      "Sometimes you just want a fun, easy game you can pick up in seconds. Our casual games are perfect for short breaks — simple to learn, hard to put down, and playable instantly in your browser on any device.",
+      "Sometimes you just want a fun, easy game you can pick up in seconds. Our casual games are perfect for short breaks - simple to learn, hard to put down, and playable instantly in your browser on any device.",
   },
 };
 
 export function categorySeo(cat: Category) {
   return (
     CATEGORY_SEO[cat.id] ?? {
-      title: `Free ${cat.label} Games Online — Play Instantly`,
+      title: `Free ${cat.label} Games Online - Play Instantly`,
       description: `Play free ${cat.label.toLowerCase()} games online with no download. Instant play on mobile, tablet and desktop at BlinkGames.`,
-      intro: `Play the best free ${cat.label.toLowerCase()} games online. No downloads, no sign-ups — every game runs instantly in your browser on any device.`,
+      intro: `Play the best free ${cat.label.toLowerCase()} games online. No downloads, no sign-ups - every game runs instantly in your browser on any device.`,
     }
   );
 }
@@ -189,14 +189,14 @@ export function collectionPageJsonLd(cat: Category, gameCount: number) {
 }
 
 /**
- * Homepage FAQ — targets high-volume "unblocked games / games at school"
+ * Homepage FAQ - targets high-volume "unblocked games / games at school"
  * queries (our school + teen audience). Rendered as an accordion and emitted
  * as FAQPage structured data for rich results.
  */
 export const HOME_FAQ: { q: string; a: string }[] = [
   {
     q: "What is BlinkGames?",
-    a: "BlinkGames is a free online games website with hundreds of browser games — puzzle, action, racing, sports, arcade and .io games. Every game plays instantly in your browser with no download and no sign-up.",
+    a: "BlinkGames is a free online games website with hundreds of browser games - puzzle, action, racing, sports, arcade and .io games. Every game plays instantly in your browser with no download and no sign-up.",
   },
   {
     q: "Are the games really free?",
@@ -204,7 +204,7 @@ export const HOME_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to download or install anything?",
-    a: "No. All BlinkGames games are HTML5 games that run straight in your web browser. There is nothing to download or install — just click a game and play on your phone, tablet, laptop or school computer.",
+    a: "No. All BlinkGames games are HTML5 games that run straight in your web browser. There is nothing to download or install - just click a game and play on your phone, tablet, laptop or school computer.",
   },
   {
     q: "Can I play BlinkGames at school?",
@@ -212,7 +212,7 @@ export const HOME_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need an account to play?",
-    a: "No account is required. You can start playing any game instantly — no registration, no email, no personal details.",
+    a: "No account is required. You can start playing any game instantly - no registration, no email, no personal details.",
   },
   {
     q: "How often are new games added?",

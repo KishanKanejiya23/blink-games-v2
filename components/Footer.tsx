@@ -35,7 +35,7 @@ export function Footer() {
           <Link href="/contact">Contact</Link>
         </div>
         <div className="copyright">
-          © {new Date().getFullYear()} BlinkGames.fun — All games are property of their respective owners.
+          © {new Date().getFullYear()} BlinkGames.fun - All games are property of their respective owners.
         </div>
       </div>
     </footer>

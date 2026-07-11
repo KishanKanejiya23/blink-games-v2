@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 /**
- * Service-role Supabase client — bypasses RLS. Server-only: import it from
+ * Service-role Supabase client - bypasses RLS. Server-only: import it from
  * API routes / server components exclusively, never from client components.
  */
 export function getSupabaseAdmin() {

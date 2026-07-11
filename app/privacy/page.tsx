@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Privacy Policy",
   description:
-    "BlinkGames privacy policy — how we use cookies, Google Analytics and Google AdSense, and your rights under UK GDPR.",
+    "BlinkGames privacy policy - how we use cookies, Google Analytics and Google AdSense, and your rights under UK GDPR.",
   path: "/privacy",
 });
 
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
         <ul>
           <li>
             <strong>Analytics.</strong> We use Google Analytics 4 (and Google
-            Tag Manager) to understand how the site is used — pages visited,
+            Tag Manager) to understand how the site is used - pages visited,
             approximate location (country/city level), device type and browser.
             This data is aggregated and does not identify you personally.
           </li>

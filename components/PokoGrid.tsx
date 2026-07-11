@@ -87,7 +87,7 @@ export function PokoGrid({
         </div>
       )}
       {done && games.length > 0 && (
-        <div className="empty">You&apos;ve reached the end — {games.length} games.</div>
+        <div className="empty">You&apos;ve reached the end - {games.length} games.</div>
       )}
     </>
   );

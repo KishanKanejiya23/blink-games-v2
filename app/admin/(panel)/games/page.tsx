@@ -155,7 +155,7 @@ export default function AdminGames() {
             <div>
               <label>Category</label>
               <select className="adm-input" value={editing.category_id ?? ""} onChange={(e) => setEditing({ ...editing, category_id: e.target.value || null })}>
-                <option value="">— none —</option>
+                <option value="">- none -</option>
                 {cats.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.label}
@@ -193,7 +193,7 @@ export default function AdminGames() {
                 <td className="title-cell">
                   <Link href={`/game/${g.slug}`} target="_blank">{g.title}</Link>
                 </td>
-                <td>{g.category_id ?? "—"}</td>
+                <td>{g.category_id ?? "-"}</td>
                 <td>{g.source}</td>
                 <td>{g.plays.toLocaleString()}</td>
                 <td>

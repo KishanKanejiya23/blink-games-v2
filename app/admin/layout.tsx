@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Shared shell for /admin/* (login included) — just the stylesheet; the
+// Shared shell for /admin/* (login included) - just the stylesheet; the
 // authenticated sidebar chrome lives in the (panel) group layout.
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

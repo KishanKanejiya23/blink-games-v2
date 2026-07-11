@@ -26,7 +26,7 @@ const COLS = "id,slug,title,category_id,thumb,embed,description,featured,plays";
 
 /**
  * Only these sources are shown on the public site. The old pre-v2 catalog
- * (source 'gamemonetize', 500 games) is disabled for now — add it back here
+ * (source 'gamemonetize', 500 games) is disabled for now - add it back here
  * to re-enable. Rows are untouched in the DB and stay manageable in /admin.
  */
 const VISIBLE_SOURCES = ["poko", "manual"];
@@ -42,7 +42,7 @@ export async function getCategories(): Promise<Category[]> {
     if (error || !data?.length) return FALLBACK_CATEGORIES;
     return data as Category[];
   } catch {
-    // DB unreachable (e.g. local stack down) — keep the UI alive
+    // DB unreachable (e.g. local stack down) - keep the UI alive
     return FALLBACK_CATEGORIES;
   }
 }
@@ -97,7 +97,7 @@ export type CategoryMeta = Category & { count: number; thumb: string | null };
 
 /**
  * Categories enriched with game count + a sample thumbnail, for the Poko
- * category cards row. One count + one row query per category — cheap and
+ * category cards row. One count + one row query per category - cheap and
  * cached by the page's ISR window.
  */
 export async function getCategoryMeta(): Promise<CategoryMeta[]> {

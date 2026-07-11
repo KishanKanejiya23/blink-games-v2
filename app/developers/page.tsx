@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "For Game Developers",
   description:
-    "Get your HTML5 game on BlinkGames. We publish games from licensed distribution feeds — here's how to submit yours and reach new players.",
+    "Get your HTML5 game on BlinkGames. We publish games from licensed distribution feeds - here's how to submit yours and reach new players.",
   path: "/developers",
 });
 
@@ -24,11 +24,11 @@ export default function DevelopersPage() {
         <p>
           We source our catalogue from established HTML5 distribution feeds
           such as GamePix and GameDistribution. The fastest route is to submit
-          your game to one of those networks — once it&apos;s in a feed we
+          your game to one of those networks - once it&apos;s in a feed we
           carry, it appears on BlinkGames automatically, usually within a day.
         </p>
         <ul>
-          <li>Your game stays yours — we embed, we don&apos;t copy.</li>
+          <li>Your game stays yours - we embed, we don&apos;t copy.</li>
           <li>You&apos;re credited as the developer.</li>
           <li>In-game ad revenue is shared through the network.</li>
         </ul>
@@ -44,7 +44,7 @@ export default function DevelopersPage() {
         <p>
           Our players are on phones, tablets and school computers, so games
           that load fast, work with touch controls and play well in short
-          sessions do best — think{" "}
+          sessions do best - think{" "}
           <Link href="/category/puzzle">puzzle</Link>,{" "}
           <Link href="/category/arcade">arcade</Link>,{" "}
           <Link href="/category/io">.io</Link> and{" "}

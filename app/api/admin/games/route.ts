@@ -11,7 +11,7 @@ const COLS = "id,slug,title,category_id,thumb,embed,description,featured,plays,s
 const slugify = (s: string) =>
   s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
 
-// GET /api/admin/games?q=&cat=&page=1 — paged list + total for the table
+// GET /api/admin/games?q=&cat=&page=1 - paged list + total for the table
 export async function GET(req: NextRequest) {
   const sb = getSupabaseAdmin();
   const { searchParams } = req.nextUrl;
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ games: data, total: count ?? 0, page, pageSize: PAGE });
 }
 
-// POST /api/admin/games — add a game
+// POST /api/admin/games - add a game
 export async function POST(req: NextRequest) {
   const sb = getSupabaseAdmin();
   const body = await req.json().catch(() => null);

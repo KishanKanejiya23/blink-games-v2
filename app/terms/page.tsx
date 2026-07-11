@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Terms of Use",
   description:
-    "Terms of use for BlinkGames — the free online games site. Play hundreds of browser games with no download and no sign-up.",
+    "Terms of use for BlinkGames - the free online games site. Play hundreds of browser games with no download and no sign-up.",
   path: "/terms",
 });
 
@@ -23,7 +23,7 @@ export default function TermsPage() {
         <h2>The service</h2>
         <p>
           BlinkGames provides free, browser-based games supplied by licensed
-          third-party distributors. The service is provided &quot;as is&quot; —
+          third-party distributors. The service is provided &quot;as is&quot; -
           we work hard to keep everything running, but we can&apos;t guarantee
           any particular game will always be available, since games come and go
           from the upstream feeds.

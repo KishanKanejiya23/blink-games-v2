@@ -67,12 +67,12 @@ export function InfiniteGrid({
     <>
       <div className="grid">
         {games.map((g, i) => (
-          // First rows are above the fold — load those thumbs eagerly (LCP).
+          // First rows are above the fold - load those thumbs eagerly (LCP).
           <GameCard key={g.id} game={g} priority={i < 8} />
         ))}
       </div>
       {!done && <div ref={sentinel} className="empty">{loading ? "Loading more games…" : "Scroll for more"}</div>}
-      {done && games.length > 0 && <div className="empty">You&apos;ve reached the end — {games.length} games.</div>}
+      {done && games.length > 0 && <div className="empty">You&apos;ve reached the end - {games.length} games.</div>}
     </>
   );
 }
