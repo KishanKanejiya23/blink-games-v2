@@ -50,6 +50,8 @@ const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-18334430062400
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 // Google Analytics 4 (gtag.js). Remove the env var to pull it out.
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// OneSignal web push (re-engagement). Unset = nothing loads.
+const ONESIGNAL_APP_ID = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Offcanvas search drawer content (Poko design) — shared on every page.
@@ -98,6 +100,20 @@ gtag('config', '${GA_ID}');`}
             crossOrigin="anonymous"
             strategy="afterInteractive"
           />
+        )}
+        {ONESIGNAL_APP_ID && (
+          <>
+            <Script
+              src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+              strategy="afterInteractive"
+            />
+            <Script id="onesignal-init" strategy="afterInteractive">
+              {`window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({ appId: "${ONESIGNAL_APP_ID}" });
+});`}
+            </Script>
+          </>
         )}
       </head>
       <body>
